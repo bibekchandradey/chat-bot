@@ -1,5 +1,7 @@
 <?php
 
+
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,4 +30,16 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
+
+Route::middleware(['auth'])->group(function () {
+
+
+        Route::controller(AdminController::class)->group(function () {
+            Route::get('/admin/logout', 'destroy')->name('admin.logout');
+
+
+        });
+
+    });
 require __DIR__.'/auth.php';
